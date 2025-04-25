@@ -1,23 +1,26 @@
 package controller
 
 import (
-	"CRUD-GO/src/configuration/rest_err"
+	"CRUD-GO/src/configuration/logger"
+	"CRUD-GO/src/configuration/validation"
 	"CRUD-GO/src/controller/model/request"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
 func CreateUser(c *gin.Context) {
-
+	logger.Info("Init CreateUser controller",
+		zap.String("journey", "createUser"),
+	)
 	var userRequest request.UserRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
-		restErr := rest_err.NewBadRequestError(
-			fmt.Sprintf("There are some incorrect filds, error=%s\n", err.Error()))
+		logger.Error("Error trying to validate user info", err,
+			zap.String("journey", "createUser"))
+		errRest := validation.ValidateUserError(err)
 
-		c.JSON(restErr.Code, restErr)
+		c.JSON(errRest.Code, errRest)
 		return
 	}
-
 }
