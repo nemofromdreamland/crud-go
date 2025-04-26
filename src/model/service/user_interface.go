@@ -3,6 +3,7 @@ package service
 import (
 	"CRUD-GO/src/configuration/model"
 	"CRUD-GO/src/configuration/rest_err"
+	"CRUD-GO/src/model/repository"
 )
 
 func NewUserDomainService(
