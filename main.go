@@ -3,9 +3,8 @@ package main
 import (
 	"CRUD-GO/src/configuration/database/mongodb"
 	"CRUD-GO/src/configuration/logger"
-	"CRUD-GO/src/controller"
 	"CRUD-GO/src/controller/routes"
-	"CRUD-GO/src/model/service"
+	"context"
 
 	"log"
 
@@ -15,22 +14,24 @@ import (
 
 func main() {
 	logger.Info("About to start user application")
-	err := godotenv.Load()
+
+	godotenv.Load()
+
+	database, err := mongodb.NewMongoDBConnection(context.Background())
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatalf(
+			"Error trying to connect to database, error=%s \n",
+			err.Error())
+		return
 	}
 
-	mongodb.InitConnection()
-
-	service := service.NewUserDomainService(nil)
-	userController := controller.NewUserControllerInterface(service)
+	userController := initDependencies(database)
 
 	router := gin.Default()
-
+	gin.SetMode(gin.ReleaseMode)
 	routes.InitRoutes(&router.RouterGroup, userController)
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}
-
 }
