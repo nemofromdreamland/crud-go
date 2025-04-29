@@ -4,6 +4,8 @@ go 1.24.1
 
 require go.uber.org/zap v1.27.0
 
+require github.com/google/uuid v1.6.0 // indirect
+
 require (
 	github.com/bytedance/sonic v1.13.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
