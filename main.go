@@ -5,13 +5,18 @@ import (
 	"CRUD-GO/src/configuration/logger"
 	"CRUD-GO/src/controller/routes"
 	"context"
-
 	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
+// @version 1.0
+// @description API for crud operations on users
+// @host localhost:8080
+// @BasePath /
+// @schemes http
+// @license MIT
 func main() {
 	logger.Info("About to start user application")
 
