@@ -5,6 +5,8 @@ import (
 	"CRUD-GO/src/model"
 
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitRoutes(
@@ -19,4 +21,5 @@ func InitRoutes(
 
 	r.POST("/login", userController.LoginUser)
 
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 }

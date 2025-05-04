@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "CRUD-GO/docs"
 	"CRUD-GO/src/configuration/database/mongodb"
 	"CRUD-GO/src/configuration/logger"
 	"CRUD-GO/src/controller/routes"
