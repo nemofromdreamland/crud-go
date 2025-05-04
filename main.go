@@ -11,6 +11,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// @title CRUD-GO | Rafael Freire
 // @version 1.0
 // @description API for crud operations on users
 // @host localhost:8080
